@@ -61,4 +61,4 @@ Forbes & Rigobon, *No Contagion, Only Interdependence* (J. Finance, 2002) · Die
 ---
 **Author:** Dr. Muhammad Imran Bhatti, PhD (Finance), MScFE · FCMA · [LinkedIn](https://www.linkedin.com/in/drimranbhatti) · [imranbhatti.com](https://imranbhatti.com)
 
-*Developed from my MScFE capstone research on the impact of COVID-19 on financial markets (WorldQuant University, team project). This repository is an independent, rewritten and extended implementation. Research only; not investment advice. MIT licensed.*
+*Developed from my MScFE capstone research on the impact of COVID-19 on financial markets (WorldQuant University). This repository is an independent, rewritten and extended implementation. Research only; not investment advice. MIT licensed.*
