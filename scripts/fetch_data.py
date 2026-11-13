@@ -24,3 +24,7 @@ if __name__ == "__main__":
     px = px[px["SPY"].notna()]  # US trading calendar
     px.round(6).to_csv(out / "prices.csv")
     print(px.shape)
+    # long SPY / VIX history for the volatility-forecasting notebook (05)
+    sv = yf.download(["SPY", "^VIX"], start="2000-01-01", end="2026-11-01", auto_adjust=True, progress=False)["Close"].dropna()
+    sv.columns = ["spy", "vix"]
+    sv.round(4).to_csv(out / "spy_vix_2000.csv")

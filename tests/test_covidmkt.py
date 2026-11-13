@@ -45,3 +45,18 @@ def test_var_es_ordering_and_t_tails():
     v0, _ = stress.var_es(stress.monte_carlo(w, mu * 0, cov, n_sims=200_000))   # zero drift, like the formula
     # MC losses are simple returns; the parametric quantile is in log space
     assert v0 == pytest.approx(-np.expm1(-stress.parametric_var(w.values, cov.values)), rel=0.02)
+
+
+def test_forward_realised_vol_and_qlike():
+    r = pd.Series([0.01, -0.01, 0.02, 0.0, 0.01], index=pd.bdate_range("2020-01-01", periods=5))
+    f = volatility.forward_realised_vol(r, horizon=2)
+    assert f.iloc[0] == pytest.approx(np.sqrt(252 * (0.01 ** 2 + 0.02 ** 2) / 2))   # uses days 2 and 3 only
+    assert np.isnan(f.iloc[-1])
+    assert volatility.qlike([1.0, 2.0], [1.0, 2.0]) == pytest.approx(0.0)
+    assert volatility.qlike([1.0], [2.0]) > 0
+
+
+def test_diebold_mariano_detects_better_forecast():
+    a = rng.normal(1.0, 0.1, 2000); b = a + 0.5
+    stat, p = volatility.diebold_mariano(a, b, h=5)
+    assert stat < 0 and p < 0.01
